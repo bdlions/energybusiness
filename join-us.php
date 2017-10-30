@@ -1,3 +1,54 @@
+<?php
+if (isset($_POST['join-send-btn'])) {
+    $options = "";
+	foreach ($_POST['check_list'] as $check_list_value) {
+		if($check_list_value == 1)
+		{
+			$options = $options. "Sales Network.";
+		}
+		if($check_list_value == 2)
+		{
+			$options = $options. "Sales Partner Programme.";
+		}
+		if($check_list_value == 3)
+		{
+			$options = $options. "Supplier Network.";
+		}
+		if($check_list_value == 4)
+		{
+			$options = $options. "By Google.";
+		}
+		if($check_list_value == 5)
+		{
+			$options = $options. "By News Paper.";
+		}
+		if($check_list_value == 6)
+		{
+			$options = $options. "By Advertisement.";
+		}
+	}
+	
+	$name = "";
+    $email = "";
+	$company_name = "";
+	$phone = "";
+    if (isset($_POST['name']) && !empty($_POST['name'])) {
+        $name = $_POST['name'];
+    }
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = $_POST['email'];
+    }
+	if (isset($_POST['company_name']) && !empty($_POST['company_name'])) {
+        $company_name = $_POST['company_name'];
+    }
+	if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+        $phone = $_POST['phone'];
+    }
+    $mail_content = "Name:" . $name . ",\r\nEmail:" . $email . ",\r\nCompany Name:" . $company_name . ",\r\nPhone:" . $phone . ",\r\nOptions:" . $options;
+    $headers = "From: " . $email;
+    mail("info@ukenergybusiness.com", $email, $mail_content, $headers);
+}
+?>
 <?php include './header.php'; ?>
 <div id="header" class="container-fluid">
     <div class="container">
@@ -67,7 +118,7 @@
         </div>
         <div class="row form-group margin-top-50px">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <form>
+                <form action="#" method="post">
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 form wow fadeInLeftBig" data-wow-duration="1s">
                             <div class="row form-group">
@@ -79,7 +130,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="check-box">
                                                 <label>
-                                                    <input type="checkbox"> <span>Sales Network  </span>
+                                                    <input type="checkbox" name="check_list[]" value="1"> <span>Sales Network  </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -88,7 +139,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="check-box">
                                                 <label>
-                                                    <input type="checkbox"> <span>Sales Partner Programme  </span>
+                                                    <input type="checkbox" name="check_list[]" value="2"> <span>Sales Partner Programme  </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -97,7 +148,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="check-box">
                                                 <label>
-                                                    <input type="checkbox"> <span>Supplier Network   </span>
+                                                    <input type="checkbox" name="check_list[]" value="3"> <span>Supplier Network   </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -113,7 +164,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="check-box">
                                                 <label>
-                                                    <input type="checkbox"> <span>By Google   </span>
+                                                    <input type="checkbox" name="check_list[]" value="4"> <span>By Google   </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -122,7 +173,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="check-box">
                                                 <label>
-                                                    <input type="checkbox"> <span>By News Paper  </span>
+                                                    <input type="checkbox" name="check_list[]" value="5"> <span>By News Paper  </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -131,7 +182,7 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="check-box">
                                                 <label>
-                                                    <input type="checkbox"> <span>By Advertisement   </span>
+                                                    <input type="checkbox" name="check_list[]" value="6"> <span>By Advertisement   </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -145,7 +196,7 @@
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter Name">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +207,7 @@
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input type="email" class="form-control" id="username" placeholder="Enter Email">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +218,7 @@
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-home"></i></div>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter Company Name">
+                                        <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Enter Company Name">
                                     </div>
                                 </div>
                             </div>
@@ -178,13 +229,13 @@
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter Phone Number">
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number">
                                     </div>
                                 </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-xs-12 col-sm-offset-3 col-sm-9 col-md-offset-3 col-md-9 col-lg-offset-3 col-lg-9">
-                                    <a class="anchor-holder custom-button margin-top-20px  pull-right">Submit & Download</a>
+                                    <button class="anchor-holder custom-button margin-top-20px  pull-right" id="join-send-btn" name="join-send-btn">Submit & Download</button>
                                 </div>
                             </div>
                         </div>

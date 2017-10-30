@@ -1,3 +1,26 @@
+<?php
+if (isset($_POST['quick-msg-send-btn'])) {
+    $footer_name = "";
+    $footer_email = "";
+	$footer_contact_number = "";
+    $footer_message = "";
+    if (isset($_POST['footer_name']) && !empty($_POST['footer_name'])) {
+        $footer_name = $_POST['footer_name'];
+    }
+    if (isset($_POST['footer_email']) && !empty($_POST['footer_email'])) {
+        $footer_email = $_POST['footer_email'];
+    }
+	if (isset($_POST['footer_contact_number']) && !empty($_POST['footer_contact_number'])) {
+        $footer_contact_number = $_POST['footer_contact_number'];
+    }
+    if (isset($_POST['footer_message']) && !empty($_POST['footer_message'])) {
+        $footer_message = $_POST['footer_message'];
+    }
+    $mail_content = "Name:" . $footer_name . ",\r\nEmail:" . $footer_email . ",\r\nContact Number:" . $footer_contact_number . ",\r\nMessage:" . $footer_message;
+    $headers = "From: " . $footer_email;
+    mail("info@ukenergybusiness.com", $footer_email, $mail_content, $headers);
+}
+?>
 <div class="container margin-bottom-10px">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -105,25 +128,25 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <label>Name</label>
-                <input class="form-control" type="text" placeholder="Your Name" name="footer_name">
+                <input class="form-control" type="text" placeholder="Your Name" id="footer_name" name="footer_name">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <label>Email</label>
-                <input class="form-control" type="text" placeholder="Your Email" name="footer_email">
+                <input class="form-control" type="text" placeholder="Your Email" id="footer_email" name="footer_email">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <label>Conatct Number</label>
-                <input class="form-control" type="text" placeholder="Your Conatct Number" name="footer_contact_number">
+                <input class="form-control" type="text" placeholder="Your Conatct Number" id="footer_contact_number" name="footer_contact_number">
             </div>
         </div>
         <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <label>Message</label>
-                <textarea rows="3" class="form-control" placeholder="Your Message" name="footer_message"></textarea>
+                <textarea rows="3" class="form-control" placeholder="Your Message" id="footer_message" name="footer_message"></textarea>
             </div>
         </div>
         <div class="row form-group">
