@@ -1,29 +1,25 @@
 <?php
 if (isset($_POST['contact-send-btn'])) {
     $options = "";
-	foreach ($_POST['check_list'] as $check_list_value) {
-		if($check_list_value == 1)
-		{
-			$options = $options. "I am interested in a price comparison for my business energy.";
-		}
-		if($check_list_value == 2)
-		{
-			$options = $options. "I want to reduce my business energy consumption.";
-		}
-		if($check_list_value == 3)
-		{
-			$options = $options. "I am interested to join UK Energy Business.";
-		}
-		if($check_list_value == 4)
-		{
-			$options = $options. "I need help to understand my bills.";
-		}
-	}
-	
-	$name = "";
+    foreach ($_POST['check_list'] as $check_list_value) {
+        if ($check_list_value == 1) {
+            $options = $options . "I am interested in a price comparison for my business energy.";
+        }
+        if ($check_list_value == 2) {
+            $options = $options . "I want to reduce my business energy consumption.";
+        }
+        if ($check_list_value == 3) {
+            $options = $options . "I am interested to join UK Energy Business.";
+        }
+        if ($check_list_value == 4) {
+            $options = $options . "I need help to understand my bills.";
+        }
+    }
+
+    $name = "";
     $email = "";
-	$company_name = "";
-	$phone = "";
+    $company_name = "";
+    $phone = "";
     $message = "";
     if (isset($_POST['name']) && !empty($_POST['name'])) {
         $name = $_POST['name'];
@@ -31,10 +27,10 @@ if (isset($_POST['contact-send-btn'])) {
     if (isset($_POST['email']) && !empty($_POST['email'])) {
         $email = $_POST['email'];
     }
-	if (isset($_POST['company_name']) && !empty($_POST['company_name'])) {
+    if (isset($_POST['company_name']) && !empty($_POST['company_name'])) {
         $company_name = $_POST['company_name'];
     }
-	if (isset($_POST['phone']) && !empty($_POST['phone'])) {
+    if (isset($_POST['phone']) && !empty($_POST['phone'])) {
         $phone = $_POST['phone'];
     }
     if (isset($_POST['message']) && !empty($_POST['message'])) {
@@ -43,6 +39,9 @@ if (isset($_POST['contact-send-btn'])) {
     $mail_content = "Name:" . $name . ",\r\nEmail:" . $email . ",\r\nCompany Name:" . $company_name . ",\r\nPhone:" . $phone . ",\r\nOptions:" . $options . ",\r\nMessage:" . $message;
     $headers = "From: " . $email;
     mail("info@ukenergybusiness.com", $email, $mail_content, $headers);
+    echo "<script>
+            alert('We have received your message and would like to thank you for writing to us. If your inquiry is urgent, please use the telephone number listed below, to talk to one of our staff members. Otherwise, we will reply by email shortly.');
+         </script>";
 }
 ?>
 <?php include './header.php'; ?>
